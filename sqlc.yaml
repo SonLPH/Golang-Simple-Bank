@@ -1,0 +1,26 @@
+version: "2"
+cloud:
+    organization: ""
+    project: ""
+    hostname: ""
+sql:
+- schema: "./db/migration"
+  engine: "postgresql"
+  queries: "./db/query"
+  gen:
+    go:
+        package: 'db'
+        out: './db/sqlc'
+        emit_json_tags: true
+        emit_prepared_queries: false
+        emit_interface: false
+        emit_exact_table_names: false 
+  database:
+    uri: "postgresql://root:1@localhost:5432/simple_bank?sslmode=disable"
+  rules:
+    - sqlc/db-prepare
+
+overrides:
+    go: null
+plugins: []
+rules: []
